@@ -1,0 +1,20 @@
+---
+- name: Manage users on target servers
+  hosts: all
+  become: true
+  tasks:
+    - name: Create a user
+      user:
+        name: "{{ username }}"
+        state: present
+        shell: /bin/bash
+        groups: "{{ user_groups | default(omit) }}"
+        password: "{{ password | default(omit) }}"
+        update_password: always
+
+    - name: Allow sudo access
+      copy:
+        dest: "/etc/sudoers.d/{{ username }}"
+        content: "{{ username }} ALL=(ALL) NOPASSWD:ALL"
+        mode: "0440"
+      when: enable_sudo | default(False)

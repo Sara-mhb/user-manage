@@ -1,0 +1,5 @@
+---
+username: "testuser"
+password: "{{ 'YourPasswordHere' | password_hash('sha512') }}"
+enable_sudo: true
+user_groups: "sudo"
