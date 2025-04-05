@@ -1,8 +1,0 @@
----
-- name: Create a simple text file on remote hosts
-  hosts: all
-  tasks:
-    - name: Create a text file
-      copy:
-        dest: /tmp/example.txt
-        content: "Hello, this is a simple text file created by Ansible!"
